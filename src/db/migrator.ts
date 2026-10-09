@@ -62,7 +62,7 @@ export function runMigrations(db?: Database.Database): string[] {
   return newlyApplied;
 }
 
-export function runSeeds(db?: Database.Database): string[] {
+export function runSeeds(db?: Database.Database, options?: { includeDemo?: boolean }): string[] {
   const activeDb = db || getDatabase();
   const seedsDir = path.resolve(process.cwd(), "src/db/seeds");
 
@@ -73,6 +73,7 @@ export function runSeeds(db?: Database.Database): string[] {
   const files = fs
     .readdirSync(seedsDir)
     .filter((f) => f.endsWith(".sql"))
+    .filter((f) => (options?.includeDemo ? true : !f.includes("demo")))
     .sort();
 
   const appliedSeeds: string[] = [];
@@ -84,6 +85,30 @@ export function runSeeds(db?: Database.Database): string[] {
   }
 
   return appliedSeeds;
+}
+
+export function runDemoSeeds(db?: Database.Database): string[] {
+  const activeDb = db || getDatabase();
+  const seedsDir = path.resolve(process.cwd(), "src/db/seeds");
+
+  if (!fs.existsSync(seedsDir)) {
+    return [];
+  }
+
+  const files = fs
+    .readdirSync(seedsDir)
+    .filter((f) => f.endsWith(".sql") && f.includes("demo"))
+    .sort();
+
+  const appliedDemoSeeds: string[] = [];
+
+  for (const file of files) {
+    const sqlContent = fs.readFileSync(path.join(seedsDir, file), "utf8");
+    activeDb.exec(sqlContent);
+    appliedDemoSeeds.push(file);
+  }
+
+  return appliedDemoSeeds;
 }
 
 export function rollbackMigration(db?: Database.Database): string | null {

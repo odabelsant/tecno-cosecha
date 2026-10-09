@@ -12,7 +12,8 @@
     "test": "vitest run",
     "test:watch": "vitest",
     "db:migrate": "node -e 'const { runMigrations } = require(\"./dist/db\"); runMigrations();'",
-    "db:seed": "node -e 'const { runSeeds } = require(\"./dist/db\"); runSeeds();'"
+    "db:seed": "node -e 'const { runSeeds } = require(\"./dist/db\"); runSeeds();'",
+    "seed:demo": "tsx scripts/seed-demo.ts"
   },
   "dependencies": {
     "@types/better-sqlite3": "^9.6.0",
@@ -27,6 +28,7 @@
     "@types/react-dom": "^19.0.4",
     "eslint": "^9.22.0",
     "eslint-config-next": "^15.2.1",
+    "tsx": "^4.23.15",
     "typescript": "^5.8.2",
     "vitest": "^3.0.8"
   }

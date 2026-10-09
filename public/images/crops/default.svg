@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 240" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FBF7EE"/>
+      <stop offset="100%" stop-color="#EFE8D6"/>
+    </linearGradient>
+    <linearGradient id="primaryGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#245C3A"/>
+      <stop offset="100%" stop-color="#143421"/>
+    </linearGradient>
+  </defs>
+  <rect width="320" height="240" rx="16" fill="url(#bg)"/>
+  <ellipse cx="160" cy="195" rx="70" ry="12" fill="#253129" opacity="0.12"/>
+  <!-- Cesta / Huacal estilizado -->
+  <path d="M100 130 L110 185 C112 188, 116 190, 120 190 L200 190 C204 190, 208 188, 210 185 L220 130 Z" fill="#C8754D"/>
+  <line x1="125" y1="130" x2="135" y2="190" stroke="#7C2D12" stroke-width="2"/>
+  <line x1="160" y1="130" x2="160" y2="190" stroke="#7C2D12" stroke-width="2"/>
+  <line x1="195" y1="130" x2="185" y2="190" stroke="#7C2D12" stroke-width="2"/>
+  <rect x="95" y="125" width="130" height="12" rx="4" fill="#9A3412"/>
+  <!-- Brotes verdes saliendo de la canasta -->
+  <path d="M140 125 C140 90, 120 75, 110 70 C130 75, 145 95, 145 125 Z" fill="#4ADE80"/>
+  <path d="M160 125 C160 85, 150 65, 160 55 C170 65, 165 85, 165 125 Z" fill="#22C55E"/>
+  <path d="M180 125 C180 90, 200 75, 210 70 C190 75, 175 95, 175 125 Z" fill="#166534"/>
+  <rect x="20" y="20" width="80" height="24" rx="12" fill="#245C3A" opacity="0.9"/>
+  <text x="60" y="36" fill="#FFFFFF" font-family="-apple-system, sans-serif" font-size="11" font-weight="700" text-anchor="middle">COSECHA</text>
+</svg>

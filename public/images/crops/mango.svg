@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 240" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FBF7EE"/>
+      <stop offset="100%" stop-color="#EFE8D6"/>
+    </linearGradient>
+    <linearGradient id="mangoGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FBBF24"/>
+      <stop offset="40%" stop-color="#F97316"/>
+      <stop offset="100%" stop-color="#DC2626"/>
+    </linearGradient>
+  </defs>
+  <rect width="320" height="240" rx="16" fill="url(#bg)"/>
+  <ellipse cx="160" cy="195" rx="65" ry="12" fill="#253129" opacity="0.12"/>
+  <!-- Tallo y Hoja -->
+  <path d="M165 75 C165 60, 172 50, 178 45" stroke="#78350F" stroke-width="4" stroke-linecap="round"/>
+  <path d="M168 62 C195 50, 215 65, 220 75 C205 78, 185 75, 168 62 Z" fill="#15803D"/>
+  <!-- Forma arriñonada del mango banilejo -->
+  <path d="M150 75 C190 70, 220 100, 215 145 C210 185, 170 195, 140 185 C105 175, 110 120, 130 90 C135 80, 142 75, 150 75 Z" fill="url(#mangoGrad)"/>
+  <!-- Brillo -->
+  <ellipse cx="150" cy="115" rx="15" ry="25" fill="#FFFFFF" opacity="0.3" transform="rotate(-20 150 115)"/>
+  <rect x="20" y="20" width="70" height="24" rx="12" fill="#245C3A" opacity="0.9"/>
+  <text x="55" y="36" fill="#FFFFFF" font-family="-apple-system, sans-serif" font-size="11" font-weight="700" text-anchor="middle">FRUTAS</text>
+</svg>

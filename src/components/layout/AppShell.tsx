@@ -4,6 +4,8 @@ import React from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
+import { DevUserSwitcher } from "@/components/dev/DevUserSwitcher";
+
 export interface AppShellProps {
   children: React.ReactNode;
 }
@@ -55,6 +57,9 @@ export const AppShell: React.FC<AppShellProps> = ({ children }) => {
       <main className="shell-main" id="main-content">
         {children}
       </main>
+
+      {/* Selector Flotante de Cuentas Demo en Desarrollo */}
+      <DevUserSwitcher />
 
       {/* Barra de Navegación Inferior (Mobile-first, fija abajo) */}
       <nav className="mobile-bottom-nav" aria-label="Navegación inferior móvil">

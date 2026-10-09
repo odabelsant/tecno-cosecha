@@ -1,4 +1,5 @@
 "use client";
+/* eslint-disable @next/next/no-img-element */
 
 import React, { useState, useEffect, useCallback } from "react";
 import { Card } from "@/components/ui/Card";
@@ -18,6 +19,26 @@ interface PostItem {
   province: string;
   municipality: string;
   target_date: string;
+  image_url?: string;
+}
+
+function getCropImage(post: PostItem): string {
+  if (post.image_url && post.image_url.trim().length > 0) {
+    return post.image_url;
+  }
+  const t = post.title.toLowerCase();
+  if (t.includes("tomate")) return "/images/crops/tomate.svg";
+  if (t.includes("zanahoria")) return "/images/crops/zanahoria.svg";
+  if (t.includes("habichuela") || t.includes("guandul") || t.includes("grano")) return "/images/crops/habichuela.svg";
+  if (t.includes("plátano") || t.includes("platano")) return "/images/crops/platano.svg";
+  if (t.includes("mango")) return "/images/crops/mango.svg";
+  if (t.includes("cebolla")) return "/images/crops/cebolla.svg";
+  if (t.includes("ají") || t.includes("aji")) return "/images/crops/aji.svg";
+  if (t.includes("yuca")) return "/images/crops/yuca.svg";
+  if (t.includes("batata")) return "/images/crops/batata.svg";
+  if (t.includes("aguacate")) return "/images/crops/aguacate.svg";
+  if (t.includes("chinola")) return "/images/crops/chinola.svg";
+  return "/images/crops/default.svg";
 }
 
 export default function CatalogoDiscoveryPage() {
@@ -221,60 +242,102 @@ export default function CatalogoDiscoveryPage() {
         />
       ) : (
         <div style={{ display: "grid", gap: "16px" }}>
-          {posts.map((post) => (
-            <Card key={post.id}>
-              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", gap: "12px", marginBottom: "8px" }}>
-                <div>
-                  <div style={{ display: "flex", gap: "6px", marginBottom: "6px" }}>
-                    <Badge variant={post.post_type === "OFERTA" ? "bosque" : "terracota"}>
-                      {post.post_type === "OFERTA" ? "🛒 Cosecha en Venta" : "📢 Necesidad de Compra"}
-                    </Badge>
-                    <Badge variant="neutral">Unidad: {post.unit}</Badge>
-                  </div>
-                  <h2 style={{ fontSize: "1.25rem", fontWeight: 800, color: "var(--color-texto)", margin: 0 }}>
-                    {post.title}
-                  </h2>
-                  {post.variety && (
-                    <span style={{ fontSize: "0.85rem", color: "var(--color-text-muted)" }}>
-                      Variedad: {post.variety}
-                    </span>
-                  )}
-                </div>
-                <div style={{ textAlign: "right" }}>
-                  <div style={{ fontSize: "1.3rem", fontWeight: 800, color: "var(--color-verde-bosque)" }}>
-                    RD$ {post.price_per_unit.toLocaleString("es-DO", { minimumFractionDigits: 2 })}
-                  </div>
-                  <span style={{ fontSize: "0.8rem", color: "var(--color-text-muted)" }}>
-                    por {post.unit}
-                  </span>
-                </div>
-              </div>
+          {posts.map((post) => {
+            const cropImg = getCropImage(post);
 
-              {post.description && (
-                <p style={{ color: "var(--color-text-muted)", fontSize: "0.95rem", margin: "8px 0 14px 0" }}>
-                  {post.description}
-                </p>
-              )}
+            return (
+              <Card key={post.id}>
+                <div style={{ display: "flex", gap: "16px", alignItems: "flex-start", flexWrap: "wrap" }}>
+                  {/* Fotografía / Miniatura Representativa */}
+                  <div
+                    style={{
+                      width: "110px",
+                      height: "110px",
+                      minWidth: "110px",
+                      borderRadius: "var(--radius-md)",
+                      overflow: "hidden",
+                      border: "1px solid var(--color-border)",
+                      backgroundColor: "#FAF9F5",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      boxShadow: "0 2px 6px rgba(0,0,0,0.04)",
+                      flexShrink: 0,
+                    }}
+                  >
+                    <img
+                      src={cropImg}
+                      alt={post.title}
+                      style={{
+                        width: "100%",
+                        height: "100%",
+                        objectFit: "cover",
+                        display: "block",
+                      }}
+                      loading="lazy"
+                      onError={(e) => {
+                        (e.currentTarget as HTMLImageElement).src = "/images/crops/default.svg";
+                      }}
+                    />
+                  </div>
 
-              <div
-                style={{
-                  display: "flex",
-                  justifyContent: "space-between",
-                  alignItems: "center",
-                  borderTop: "1px solid var(--color-border)",
-                  paddingTop: "10px",
-                  fontSize: "0.85rem",
-                  color: "var(--color-text-muted)",
-                  flexWrap: "wrap",
-                  gap: "8px",
-                }}
-              >
-                <span>📍 {post.province}, {post.municipality}</span>
-                <span>📦 Cantidad: <strong>{post.quantity} {post.unit}</strong></span>
-                <span>📅 Fecha: {post.target_date}</span>
-              </div>
-            </Card>
-          ))}
+                  {/* Información Principal del Lote */}
+                  <div style={{ flex: 1, minWidth: "220px" }}>
+                    <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", gap: "12px", marginBottom: "6px" }}>
+                      <div>
+                        <div style={{ display: "flex", gap: "6px", marginBottom: "6px", flexWrap: "wrap" }}>
+                          <Badge variant={post.post_type === "OFERTA" ? "bosque" : "terracota"}>
+                            {post.post_type === "OFERTA" ? "🛒 Cosecha en Venta" : "📢 Necesidad de Compra"}
+                          </Badge>
+                          <Badge variant="neutral">Unidad: {post.unit}</Badge>
+                        </div>
+                        <h2 style={{ fontSize: "1.25rem", fontWeight: 800, color: "var(--color-texto)", margin: 0 }}>
+                          {post.title}
+                        </h2>
+                        {post.variety && (
+                          <span style={{ fontSize: "0.85rem", color: "var(--color-text-muted)" }}>
+                            Variedad: {post.variety}
+                          </span>
+                        )}
+                      </div>
+                      <div style={{ textAlign: "right", whiteSpace: "nowrap" }}>
+                        <div style={{ fontSize: "1.3rem", fontWeight: 800, color: "var(--color-verde-bosque)" }}>
+                          RD$ {post.price_per_unit.toLocaleString("es-DO", { minimumFractionDigits: 2 })}
+                        </div>
+                        <span style={{ fontSize: "0.8rem", color: "var(--color-text-muted)" }}>
+                          por {post.unit}
+                        </span>
+                      </div>
+                    </div>
+
+                    {post.description && (
+                      <p style={{ color: "var(--color-text-muted)", fontSize: "0.95rem", margin: "6px 0 12px 0" }}>
+                        {post.description}
+                      </p>
+                    )}
+
+                    <div
+                      style={{
+                        display: "flex",
+                        justifyContent: "space-between",
+                        alignItems: "center",
+                        borderTop: "1px solid var(--color-border)",
+                        paddingTop: "10px",
+                        fontSize: "0.85rem",
+                        color: "var(--color-text-muted)",
+                        flexWrap: "wrap",
+                        gap: "8px",
+                      }}
+                    >
+                      <span>📍 {post.province}, {post.municipality}</span>
+                      <span>📦 Cantidad: <strong>{post.quantity} {post.unit}</strong></span>
+                      <span>📅 Fecha: {post.target_date}</span>
+                    </div>
+                  </div>
+                </div>
+              </Card>
+            );
+          })}
         </div>
       )}
     </div>

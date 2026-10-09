@@ -20,6 +20,7 @@ export interface MarketplacePost {
   target_date: string;
   province: string;
   municipality: string;
+  image_url?: string;
   status: PostStatus;
   created_at: string;
   updated_at: string;
@@ -39,6 +40,7 @@ export interface CreatePostDTO {
   target_date: string;
   province: string;
   municipality: string;
+  image_url?: string;
   status?: PostStatus; // Por defecto ACTIVA, o BORRADOR
 }
 
@@ -51,6 +53,7 @@ export interface UpdatePostDTO {
   target_date?: string;
   province?: string;
   municipality?: string;
+  image_url?: string;
   status?: PostStatus;
 }
 
@@ -85,8 +88,8 @@ export class PublicationsService {
         INSERT INTO marketplace_posts (
           id, user_id, post_type, product_id, category_id, title, variety,
           description, unit, quantity, price_per_unit, target_date,
-          province, municipality, status
-        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+          province, municipality, image_url, status
+        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
       `)
       .run(
         dto.id,
@@ -103,6 +106,7 @@ export class PublicationsService {
         dto.target_date,
         dto.province,
         dto.municipality,
+        dto.image_url || null,
         status
       );
 
@@ -154,6 +158,7 @@ export class PublicationsService {
     const target_date = dto.target_date !== undefined ? dto.target_date : existing.target_date;
     const province = dto.province !== undefined ? dto.province : existing.province;
     const municipality = dto.municipality !== undefined ? dto.municipality : existing.municipality;
+    const image_url = dto.image_url !== undefined ? dto.image_url : existing.image_url;
     const status = dto.status !== undefined ? dto.status : existing.status;
 
     if (quantity <= 0) {
@@ -168,7 +173,7 @@ export class PublicationsService {
         UPDATE marketplace_posts
         SET title = ?, variety = ?, description = ?, quantity = ?,
             price_per_unit = ?, target_date = ?, province = ?,
-            municipality = ?, status = ?, updated_at = CURRENT_TIMESTAMP
+            municipality = ?, image_url = ?, status = ?, updated_at = CURRENT_TIMESTAMP
         WHERE id = ?
       `)
       .run(
@@ -180,6 +185,7 @@ export class PublicationsService {
         target_date,
         province,
         municipality,
+        image_url || null,
         status,
         postId
       );

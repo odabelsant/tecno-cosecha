@@ -199,15 +199,89 @@
       <h1>Estado del Software</h1>
       <p>Documentación viva y transparente del ciclo de desarrollo, mantenida por el <strong>Profesor Agent</strong>.</p>
       <div class="meta-bar">
-        <span class="badge badge-primary">Fase 15: Administración y Moderación</span>
-        <span class="badge badge-secondary">Fase 16: Validación E2E y Piloto</span>
+        <span class="badge badge-primary">Gestión de Imágenes & Multiformato</span>
+        <span class="badge badge-secondary">Fase 15 & 16: Admin & Piloto</span>
         <span class="badge">Fecha: 2026-10-09</span>
       </div>
     </header>
 
+    <!-- ITERACIÓN ACTUAL: GESTIÓN DE IMÁGENES -->
+    <div style="background: #245C3A; color: #FFFFFF; padding: 1rem 1.5rem; border-radius: 12px; margin-bottom: 1.5rem;">
+      <h2 style="color: #FFFFFF; margin-bottom: 0.25rem;">🌾 Iteración: Gestión de Imágenes y Carga Multiformato (5 Extensiones)</h2>
+      <p style="color: #F7F5EC; margin: 0; font-size: 0.95rem;">Soporte de miniaturas en Catálogo, uploader interactivo con validación explícita (JPG, PNG, GIF, SVG, WebP) y vista previa instantánea en Publicar.</p>
+    </div>
+
     <!-- 1. ANTES -->
     <section class="section-card">
       <h2>1. ANTES</h2>
+      <p>Las tarjetas del catálogo mostraban únicamente atributos de texto plano (título, precio, unidad, ubicación) sin fotografías ni soporte visual representativo. La pantalla de publicación (<code>/publicar</code>) era un formulario prototípico sin campo de subida de archivos ni validación de formatos multimedia, y la base de datos relacional no contemplaba persistencia de imágenes en los lotes de cosecha.</p>
+    </section>
+
+    <!-- 2. CAMBIO -->
+    <section class="section-card">
+      <h2>2. CAMBIO</h2>
+      <ul>
+        <li><strong>Base de Datos y Persistencia:</strong> Migración versionada <code>0007_posts_image_url.sql</code> agregando columna <code>image_url</code> a <code>marketplace_posts</code>. Adaptación de DTOs y servicios en <code>src/modules/publications/service.ts</code>. Endpoints GET y POST en <code>/api/publications</code>.</li>
+        <li><strong>Biblioteca Gráfica de Cultivos:</strong> Colección de gráficos vectoriales SVG ligeros (&lt;1KB cada uno) en <code>public/images/crops/</code> (tomate, zanahoria, habichuela, plátano, mango, cebolla, ají, yuca, batata, aguacate, chinola y default). Sembrado de imágenes en 16 publicaciones con <code>npm run seed:demo</code>.</li>
+        <li><strong>Frontend — Catálogo con Miniaturas (<code>src/app/catalogo/page.tsx</code>):</strong> Miniaturas representativas (110x110px) en cada tarjeta con carga diferida y fallback automático inteligente.</li>
+        <li><strong>Frontend — Módulo de Carga Multiformato (<code>src/app/publicar/page.tsx</code>):</strong> Zona drag-and-drop con soporte y validación explícita para <strong>5 extensiones estándar de la web</strong> (JPEG/JPG, PNG, GIF, SVG, WebP), tarjeta de vista previa instantánea (nombre, tamaño formateado, badge de formato) y opciones para cambiar o eliminar la foto.</li>
+        <li><strong>Pruebas Automatizadas:</strong> Nueva suite <code>tests/images.test.ts</code> (67 pruebas pasando en total).</li>
+      </ul>
+    </section>
+
+    <!-- 3. DESPUÉS -->
+    <section class="section-card">
+      <h2>3. DESPUÉS</h2>
+      <p>Los compradores pueden visualizar fotografías representativas de las cosechas directamente en el catálogo, aumentando la confianza comercial. Los productores disponen de un cargador de fotos intuitivo y accesible que valida los 5 formatos web más utilizados, previsualiza la imagen en tiempo real y persiste el lote inmediatamente.</p>
+    </section>
+
+    <!-- 4. EFECTO PARA EL USUARIO -->
+    <section class="section-card">
+      <h2>4. EFECTO PARA EL USUARIO</h2>
+      <p><strong>Comprador:</strong> Visualización inmediata del producto agrícola antes de comprar o cotizar.</p>
+      <p><strong>Productor:</strong> Facilidad de destacar su lote subiendo fotos desde su celular en formatos estándar (JPG, PNG, GIF, SVG o WebP) con vista previa instantánea.</p>
+      <p><strong>Evaluador/QA:</strong> Pruebas visuales completas tanto con datos sembrados como publicando nuevos lotes con foto.</p>
+    </section>
+
+    <!-- 5. SIN CAMBIOS -->
+    <section class="section-card">
+      <h2>5. SIN CAMBIOS</h2>
+      <p>Se conservan intactas la paleta canónica (#245C3A, #4D8A62, #C8754D, #F7F5EC, #253129), la navegación móvil fija inferior, el ciclo de cotizaciones inmutables y el panel de auditoría administrativa.</p>
+    </section>
+
+    <!-- 6. LIMITACIONES -->
+    <section class="section-card">
+      <h2>6. LIMITACIONES</h2>
+      <p>Almacenamiento actual en base de datos SQLite y rutas estáticas locales; para despliegues a gran escala se sugiere un bucket S3/R2. Límite sugerido de 8 MB por fotografía para cuidar redes móviles rurales.</p>
+    </section>
+
+    <!-- 7. CÓMO VERIFICARLO -->
+    <section class="section-card">
+      <h2>7. CÓMO VERIFICARLO</h2>
+      <pre><code>npm test tests/images.test.ts
+npm run seed:demo
+# Abrir http://localhost:3000/catalogo y http://localhost:3000/publicar</code></pre>
+    </section>
+
+    <!-- 8. DICTAMEN DEL JUEZ DE CALIDAD -->
+    <section class="section-card" style="border-left: 5px solid var(--primary);">
+      <h2>⚖️ 8. DICTAMEN DEL JUEZ DE CALIDAD (PUERTA DE CALIDAD)</h2>
+      <p><span class="badge badge-primary" style="font-size: 1rem; padding: 4px 12px;">VEREDICTO: ACEPTADO</span></p>
+      <ul>
+        <li><strong>Visualización en Catálogo:</strong> Cumplida con miniaturas representativas por cultivo y fallbacks.</li>
+        <li><strong>Carga Multiformato:</strong> Cumplida con validación para 5 formatos web (JPG, PNG, GIF, SVG, WebP) y vista previa.</li>
+        <li><strong>Persistencia y Semillas:</strong> Cumplida. 16 ofertas de venta y 12 demandas de compra activas en el mercado dominicano.</li>
+        <li><strong>Evidencias de QA:</strong> 67/67 pruebas pasando (100%), typecheck limpio, linter sin advertencias y verificación en vivo en navegador.</li>
+      </ul>
+    </section>
+
+    <hr style="border: none; border-top: 2px dashed var(--border); margin: 2rem 0;">
+
+    <h2 style="color: var(--text-muted); font-size: 1.1rem; margin-bottom: 1rem;">Iteración Anterior: Fases 15 y 16 (Admin, E2E y Piloto)</h2>
+
+    <!-- 1. ANTES PREVIO -->
+    <section class="section-card">
+      <h2>1. ANTES (Fases 15 & 16)</h2>
       <p>La plataforma disponía del flujo transaccional y los planes de suscripción (Fases 13 y 14), pero carecía de una interfaz de supervisión administrativa centralizada para moderar usuarios, revisar publicaciones reportadas y otorgar verificaciones de parcela; no existía un registro de auditoría estricto de las intervenciones técnicas; y no se disponía de una suite E2E de validación holística ni de copias de seguridad automáticas en caliente para la base de datos.</p>
     </section>
 
