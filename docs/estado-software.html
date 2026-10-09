@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Estado del Software — Tecno Cosecha</title>
+  <style>
+    :root {
+      --bg: #F7F5EC;
+      --card-bg: #FFFFFF;
+      --text-main: #253129;
+      --text-muted: #4B5A50;
+      --primary: #245C3A;
+      --primary-light: #dcfce7;
+      --secondary: #4D8A62;
+      --terracota: #C8754D;
+      --border: #DCD6C8;
+      --badge-bg: #EFECE1;
+      --badge-text: #253129;
+      --code-bg: #253129;
+      --code-text: #F7F5EC;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      line-height: 1.6;
+      background-color: var(--bg);
+      color: var(--text-main);
+      padding: 2rem 1rem;
+    }
+
+    .container {
+      max-width: 920px;
+      margin: 0 auto;
+    }
+
+    header {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 2rem;
+      margin-bottom: 2rem;
+      box-shadow: 0 2px 6px rgba(36, 92, 58, 0.05);
+    }
+
+    .brand {
+      display: inline-block;
+      font-size: 0.85rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--primary);
+      margin-bottom: 0.5rem;
+    }
+
+    h1 {
+      font-size: 2rem;
+      font-weight: 800;
+      color: var(--text-main);
+      margin-bottom: 0.5rem;
+    }
+
+    .meta-bar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      margin-top: 1rem;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      padding: 0.3rem 0.85rem;
+      border-radius: 9999px;
+      font-size: 0.825rem;
+      font-weight: 700;
+      background: var(--badge-bg);
+      color: var(--badge-text);
+      border: 1px solid var(--border);
+    }
+
+    .badge-primary {
+      background: var(--primary);
+      color: #FFFFFF;
+      border-color: var(--primary);
+    }
+
+    .badge-terracota {
+      background: var(--terracota);
+      color: #FFFFFF;
+      border-color: var(--terracota);
+    }
+
+    .badge-secondary {
+      background: var(--secondary);
+      color: #FFFFFF;
+      border-color: var(--secondary);
+    }
+
+    .section-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.75rem;
+      margin-bottom: 1.5rem;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.03);
+    }
+
+    .section-card h2 {
+      font-size: 1.25rem;
+      font-weight: 800;
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: var(--primary);
+    }
+
+    ul, ol {
+      padding-left: 1.5rem;
+      margin-bottom: 0.75rem;
+    }
+
+    li {
+      margin-bottom: 0.5rem;
+    }
+
+    p {
+      margin-bottom: 0.75rem;
+      color: var(--text-muted);
+    }
+
+    p strong, li strong {
+      color: var(--text-main);
+    }
+
+    pre {
+      background: var(--code-bg);
+      color: var(--code-text);
+      padding: 1rem;
+      border-radius: 8px;
+      overflow-x: auto;
+      font-size: 0.875rem;
+      margin: 0.75rem 0;
+    }
+
+    code {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    }
+
+    .grid-phases {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1rem;
+      margin: 1rem 0;
+    }
+
+    .phase-card {
+      background: #FAF8F2;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1rem;
+    }
+
+    .phase-card h3 {
+      font-size: 1rem;
+      color: var(--primary);
+      margin-bottom: 0.35rem;
+    }
+
+    .history-card {
+      background: #FAF8F2;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1rem;
+      margin-bottom: 0.75rem;
+    }
+
+    footer {
+      text-align: center;
+      margin-top: 3rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--border);
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <span class="brand">Tecno Cosecha • Seguimiento Pedagógico</span>
+      <h1>Estado del Software</h1>
+      <p>Documentación viva y transparente del ciclo de desarrollo, mantenida por el <strong>Profesor Agent</strong>.</p>
+      <div class="meta-bar">
+        <span class="badge badge-primary">Fase 15: Administración y Moderación</span>
+        <span class="badge badge-secondary">Fase 16: Validación E2E y Piloto</span>
+        <span class="badge">Fecha: 2026-10-09</span>
+      </div>
+    </header>
+
+    <!-- 1. ANTES -->
+    <section class="section-card">
+      <h2>1. ANTES</h2>
+      <p>La plataforma disponía del flujo transaccional y los planes de suscripción (Fases 13 y 14), pero carecía de una interfaz de supervisión administrativa centralizada para moderar usuarios, revisar publicaciones reportadas y otorgar verificaciones de parcela; no existía un registro de auditoría estricto de las intervenciones técnicas; y no se disponía de una suite E2E de validación holística ni de copias de seguridad automáticas en caliente para la base de datos.</p>
+    </section>
+
+    <!-- 2. CAMBIO -->
+    <section class="section-card">
+      <h2>2. CAMBIO</h2>
+      <p>El equipo diseñó e implementó los componentes de cierre y endurecimiento de la plataforma:</p>
+
+      <div class="grid-phases">
+        <div class="phase-card">
+          <h3>🛡️ Fase 15: Administración y Auditoría</h3>
+          <p>Panel protegido (<code>/admin</code>) con mínimo privilegio (rol ADMIN). Libro inmutable de auditoría (<code>admin_audit_logs</code>) con actor, entidad, acción y motivo obligatorio. Prohibición estricta de alteración unilateral de pedidos pactados.</p>
+        </div>
+        <div class="phase-card">
+          <h3>🚀 Fase 16: Validación E2E y Piloto</h3>
+          <p>Prueba holística de extremo a extremo (publicación &rarr; cotización &rarr; pedido &rarr; entrega con merma &rarr; reseña &rarr; disputa &rarr; auditoría &rarr; respaldo). Módulo de backup en caliente de SQLite y especificación del piloto para el Cibao Central.</p>
+        </div>
+      </div>
+      <p><strong>Persistencia:</strong> Migración versionada <code>0006_admin_audit_logs.sql</code> y reversión <code>0006_admin_audit_logs.down.sql</code>.</p>
+    </section>
+
+    <!-- 3. DESPUÉS -->
+    <section class="section-card">
+      <h2>3. DESPUÉS</h2>
+      <p>Tecno Cosecha cuenta con su arquitectura MVP completa, probada de extremo a extremo, endurecida y lista para pruebas operativas: desde el primer registro hasta la resolución mediada y la copia de seguridad, con 64 pruebas automatizadas pasando y 18 rutas Next.js operativas.</p>
+    </section>
+
+    <!-- 4. EFECTO PARA EL USUARIO -->
+    <section class="section-card">
+      <h2>4. EFECTO PARA EL USUARIO</h2>
+      <ul>
+        <li><strong>Para el Equipo de Soporte y Operaciones:</strong> Panel claro con métricas del sistema, herramientas para proteger a la comunidad de estafas y respaldo auditable de cada decisión.</li>
+        <li><strong>Para Agricultores y Compradores:</strong> Certeza de que la plataforma está supervisada activamente por humanos y que sus acuerdos no pueden ser alterados arbitrariamente.</li>
+        <li><strong>Para el Propietario del Producto:</strong> Hoja de ruta 100% implementada con criterios medibles y plan de piloto estructurado.</li>
+      </ul>
+    </section>
+
+    <!-- 5. SIN CAMBIOS -->
+    <section class="section-card">
+      <h2>5. SIN CAMBIOS</h2>
+      <ul>
+        <li>No se han integrado cobros con tarjeta ni comisiones bancarias automáticas, en cumplimiento estricto de ADR-004.</li>
+        <li>La paleta visual canónica (#245C3A, #4D8A62, #C8754D, #F7F5EC, #253129) rige de manera consistente toda la aplicación.</li>
+        <li>Todas las migraciones previas (0001 a 0005) continúan 100% íntegras y estables.</li>
+      </ul>
+    </section>
+
+    <!-- 6. LIMITACIONES -->
+    <section class="section-card">
+      <h2>6. LIMITACIONES</h2>
+      <ul>
+        <li>El piloto inicial está restringido a 15 productores y 10 comercios en el Cibao Central para mantener supervisión directa.</li>
+        <li>La resolución de incidencias es administrativa/mediada sin débitos automáticos bancarios.</li>
+      </ul>
+    </section>
+
+    <!-- 7. CÓMO VERIFICARLO -->
+    <section class="section-card">
+      <h2>7. CÓMO VERIFICARLO</h2>
+      <p>Ejecuta los siguientes comandos en tu terminal:</p>
+      <pre><code># 1. Ejecutar las 64 pruebas automatizadas
+npm test
+
+# 2. Verificar tipos y compilación de producción
+npm run typecheck && npm run lint && npm run build
+
+# 3. Iniciar la aplicación y navegar en http://localhost:3000/
+npm run dev
+
+# 4. Abrir la documentación pedagógica
+open docs/estado-software.html</code></pre>
+    </section>
+
+    <!-- HISTORIAL DE ITERACIONES -->
+    <section class="section-card">
+      <h2>Histórico de Iteraciones Anteriores</h2>
+      <div class="history-card">
+        <strong>Fases 13 y 14 — Planes, Notificaciones y Ayuda al Usuario (2026-10-09)</strong>
+        <p>Planes validados en servidor, verificación gratuita, notificaciones in-app esenciales y centro de ayuda. Veredicto del Juez: <code>ACEPTADO</code>.</p>
+      </div>
+      <div class="history-card">
+        <strong>Fases 10, 11 y 12 — Cotizaciones, Pedidos y Confianza (2026-10-09)</strong>
+        <p>Cotizaciones versionadas, máquina de estados de pedidos, reseñas anti-duplicados y mediación humana de reclamos. Veredicto del Juez: <code>ACEPTADO</code>.</p>
+      </div>
+      <div class="history-card">
+        <strong>Fases 07, 08 y 09 — Catálogo, Publicaciones y Descubrimiento (2026-10-09)</strong>
+        <p>Taxonomía aprobada, conversor de unidades, vistas General/Comprar/Vender y motor de búsqueda multi-criterio. Veredicto del Juez: <code>ACEPTADO</code>.</p>
+      </div>
+      <div class="history-card">
+        <strong>Fase 05 — Modelo de Datos y Persistencia (2026-10-09)</strong>
+        <p>SQLite relacional, tabla <code>schema_migrations</code>, restricciones CHECK y Foreign Keys. Veredicto del Juez: <code>ACEPTADO</code>.</p>
+      </div>
+      <div class="history-card">
+        <strong>Fase 04 — UX/UI Base y Sistema Visual (2026-10-09)</strong>
+        <p>Paleta canónica, navegación móvil y componentes de estado. Veredicto del Juez: <code>ACEPTADO</code>.</p>
+      </div>
+      <div class="history-card">
+        <strong>Fase 03 — Fundación Técnica y Repositorio (2026-10-09)</strong>
+        <p>Next.js 15, TypeScript estricto, Vitest, ESLint, .gitignore y .env.example. Veredicto del Juez: <code>ACEPTADO</code>.</p>
+      </div>
+      <div class="history-card">
+        <strong>Fase 02 — Alcance Funcional y Arquitectura (2026-10-09)</strong>
+        <p>Especificación de alcance MVP y registros ADR-001 a ADR-004. Veredicto del Juez: <code>ACEPTADO</code>.</p>
+      </div>
+      <div class="history-card">
+        <strong>Fase 01 — Equipo de Agentes y Puerta de Calidad (2026-10-09)</strong>
+        <p>12 perfiles canónicos, AGENTS.md, protocolo de equipo y matriz RACI. Veredicto del Juez: <code>ACEPTADO</code>.</p>
+      </div>
+    </section>
+
+    <footer>
+      Tecno Cosecha &copy; 2026 — Sincronizado por Profesor Agent con <code>docs/estado-software.md</code>
+    </footer>
+  </div>
+</body>
+</html>
